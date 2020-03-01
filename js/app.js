@@ -22,6 +22,7 @@ const knobs = document.querySelectorAll(".knob");
 
 // Theming
 const root = document.documentElement;
+const nightIcon = document.querySelector("#night-icon");
 const themeColor = document.querySelector("meta[name=theme-color]");
 const visuals = document.querySelector("#visuals");
 const visOpt = document.querySelectorAll(".vis-opt");
@@ -31,6 +32,7 @@ let visualCh = visuals.value;
 let LIST, id, theme, THEME, view;
 let newItemId = 0;
 inp.focus();
+nightmode = false;
 
 // ENTER-KEY @ main INPUT
 inp.addEventListener('keypress', function (e) {
@@ -645,6 +647,35 @@ function closeWindow() {
 }
 
 
+// ----------- NIGHT MODE ----------- //
+
+nightIcon.addEventListener('click', () => {
+
+    if (nightmode === false) {
+        nightmode = true;
+        nightMode();
+        } else {
+            nightmode = false;
+            themeChanger(themeData);
+    }
+
+})
+
+function nightMode() {
+
+    root.style.setProperty('--bg-color', "#2e2e2e");
+    root.style.setProperty('--main', "var(--night-color)");
+    root.style.setProperty('--glow', `${glow}`);
+    root.style.setProperty('--main-bg', "linear-gradient(145deg, #313131, #292929)");
+    root.style.setProperty('--main-bs', "8px 8px 16px #212121, -8px -8px 16px #3b3b3b");
+    root.style.setProperty('--inp-shadow', "inset 8px 8px 16px #212121, inset -8px -8px 16px #3b3b3b");
+    root.style.setProperty('--faint', "var(--night-color)");
+    themeColor.setAttribute("content", "#2e2e2e");
+    visOpt.forEach(opt => {opt.style.color = "#272727";});
+    // localStorage.setItem('THEME', `${themeData}`);
+}
+
+
 // ---------- THEMEs ---------- //
 
 // VISUALS CHOICE
@@ -656,153 +687,177 @@ visuals.addEventListener("change", () => {
 
 function themeChanger(themeData){
 
-switch (themeData) {
-
-    // NIGHTMODE
-    case '1':
-        root.style.setProperty('--main', "#dddddd");
-        root.style.setProperty('--bg-color', "#2e2e2e");
-        root.style.setProperty('--main-bg', "linear-gradient(145deg, #313131, #292929)");
-        root.style.setProperty('--main-bs', "8px 8px 16px #212121, -8px -8px 16px #3b3b3b");
-        root.style.setProperty('--inp-shadow', "inset 8px 8px 16px #212121, inset -8px -8px 16px #3b3b3b");
-        root.style.setProperty('--faint', "#eeeeee");
-        themeColor.setAttribute("content", "#2e2e2e");
-        visOpt.forEach(opt => {opt.style.color = "#272727";});
-        break;
+switch (themeData) {    
     
     // ROSE
-    case '2':
+    case '1':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#e7a7bd");
+        root.style.setProperty('--night-color', "#e7a7bd");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #f7b3ca, #d096aa)");
         root.style.setProperty('--main-bs', "9px 9px 18px #c08b9d, -9px -9px 18px #ffc3dd");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #c08b9d, inset -9px -9px 18px #ffc3dd");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e7a7bd");
+        if (nightmode === true){ nightMode() };
         break;
 
     // CITRUS
-    case '3':
+    case '2':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#e3e59d");
+        root.style.setProperty('--night-color', "#e3e59d");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #f3f5a8, #ccce8d)");
         root.style.setProperty('--main-bs', "9px 9px 18px #bcbe82, -9px -9px 18px #ffffb8");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #bcbe82, inset -9px -9px 18px #ffffb8");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e3e59d");
+        if (nightmode === true){ nightMode() };
         break;
 
     // LIME
-    case '4':
+    case '3':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#98e79f");
+        root.style.setProperty('--night-color', "#98e79f");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #a3f7aa, #89d08f)");
         root.style.setProperty('--main-bs', "9px 9px 18px #7ec084, -9px -9px 18px #b2ffba");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7ec084, inset -9px -9px 18px #b2ffba");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#98e79f");
+        if (nightmode === true){ nightMode() };
         break;
     
     //PEACH
-    case '5':
+    case '4':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#ffab91");
+        root.style.setProperty('--night-color', "#ffab91");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #ffb79b, #e69a83)");
         root.style.setProperty('--main-bs', "9px 9px 18px #d48e78, -9px -9px 18px #ffc8aa");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #d48e78, inset -9px -9px 18px #ffc8aa");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#ffab91");
+        if (nightmode === true){ nightMode() };
         break;
 
     // LAVENDER
-    case '6':
+    case '5':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#b4adf3");
+        root.style.setProperty('--night-color', "#b4adf3");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #c1b9ff, #a29cdb)");
         root.style.setProperty('--main-bs', "9px 9px 18px #9590ca, -9px -9px 18px #d3caff");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #9590ca, inset -9px -9px 18px #d3caff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#b4adf3");
+        if (nightmode === true){ nightMode() };
         break;
 
     // BABYBLUE
-    case '7':
+    case '6':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#97c2ff");
+        root.style.setProperty('--night-color', "#97c2ff");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #a2d0ff, #88afe6)");
         root.style.setProperty('--main-bs', "9px 9px 18px #7da1d4, -9px -9px 18px #b1e3ff");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7da1d4, inset -9px -9px 18px #b1e3ff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#97c2ff");
+        if (nightmode === true){ nightMode() };
         break;
     
     //ROYALBLUE
-    case '8':
+    case '7':
+        glow = 'brightness(140%)';
         root.style.setProperty('--main', "#dddddd");
         root.style.setProperty('--bg-color', "#364edf");
+        root.style.setProperty('--night-color', "#364edf");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #3a53ef, #3146c9)");
         root.style.setProperty('--main-bs', "9px 9px 18px #2d41b9, -9px -9px 18px #3f5bff");
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #2d41b9, inset -9px -9px 18px #3f5bff");
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#364edf");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
+        if (nightmode === true){ nightMode() };
         break;
 
     //SEAGREEN
-    case '9':
+    case '8':
+        glow = 'brightness(140%)';
         root.style.setProperty('--main', "#dddddd");
         root.style.setProperty('--bg-color', "#00876c");
+        root.style.setProperty('--night-color', "#00876c");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #009074, #007a61)");
         root.style.setProperty('--main-bs', "12px 12px 24px #00745d, -12px -12px 24px #009a7b");
         root.style.setProperty('--inp-shadow', "inset 12px 12px 24px #00745d, inset -12px -12px 24px #009a7b");
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#00876c");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
+        if (nightmode === true){ nightMode() };
         break;
     
     //MAGURO
-    case '10':
+    case '9':
+        glow = 'brightness(140%)';
         root.style.setProperty('--main', "#dddddd");
         root.style.setProperty('--bg-color', "#89212a");
+        root.style.setProperty('--night-color', "#89212a");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #93232d, #7b1e26)");
         root.style.setProperty('--main-bs', "19px 19px 37px #6e1a22, -19px -19px 37px #a42832");
         root.style.setProperty('--inp-shadow', "inset 19px 19px 37px #6e1a22, inset -19px -19px 37px #a42832");
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#89212a");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
+        if (nightmode === true){ nightMode() };
         break;
     
     // LAGOON
-    case '11':
+    case '10':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
         root.style.setProperty('--bg-color', "#63d1c5");
+        root.style.setProperty('--night-color', "#63d1c5");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #6ae0d3, #59bcb1)");
         root.style.setProperty('--main-bs', "19px 19px 37px #4fa79e, -19px -19px 37px #77fbec");
         root.style.setProperty('--inp-shadow', "inset 19px 19px 37px #4fa79e, inset -19px -19px 37px #77fbec");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#63d1c5");
+        if (nightmode === true){ nightMode() };
         break;
 
     //VEGAS GOLD
-    case '12':
+    case '11':
+        glow = 'none';
         root.style.setProperty('--main', "#272727");
-        root.style.setProperty('--bg-color', "#C5B358");
+        root.style.setProperty('--bg-color', "#c5b358");
+        root.style.setProperty('--night-color', "#c5b358");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #d3c05e, #b1a14f)");
         root.style.setProperty('--main-bs', "19px 19px 38px #a29348, -19px -19px 38px #e8d368");
         root.style.setProperty('--inp-shadow', "inset 19px 19px 38px #a29348, inset -19px -19px 38px #e8d368");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#C5B358");
+        if (nightmode === true){ nightMode() };
         break;
 
     // BATH (DEFAULT)
     case '0':
+        glow = 'none';
         root.style.setProperty('--main', "#555555");
         root.style.setProperty('--bg-color', "#e0e5ec");
+        root.style.setProperty('--night-color', "#e0e5ec");
         root.style.setProperty('--main-bg', "linear-gradient(145deg, #f0f5fd, #caced4)");
         root.style.setProperty('--main-bs', "11px 11px 19px #b8bcc2, -11px -11px 19px #ffffff");
         root.style.setProperty('--inp-shadow', "inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff");
         root.style.setProperty('--faint', "#adadad");
         themeColor.setAttribute("content", "#e0e5ec");
+        if (nightmode === true){ nightMode() };
         break;
 
 }
