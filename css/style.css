@@ -23,16 +23,6 @@ select {
     background: transparent;
 }
 
-/* THEME DEFAULT */
-/* :root{
-    --main: #555;
-    --bg-color: #e0e5ec;
-    --main-bg: linear-gradient(145deg, #f0f5fd, #caced4);
-    --main-bs: 11px 11px 19px #b8bcc2, -11px -11px 19px #ffffff;
-    --inp-shadow: inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff;
-    --faint: #adadad;
-} */
-
 /* PSEUDO_SELECTORS */
 ::selection{
     background-color: #aaaaaa;
@@ -151,13 +141,12 @@ button.check{
     box-shadow:  var(--main-bs);
     transition: all 1s ease-in-out;
 }
-#tdList:empty, #tdList.alldone, #tdList.allundone, #tdList.nonedeleted{
+#tdList:empty, #tdList.alldone, #tdList.allundone, #tdList.nonedeleted, #tdList.allempty{
     box-shadow: none;
     animation: none;
     margin: 5rem 0;
 }
 #tdList:empty::after{
-    /* content: 'No todos to show yet'; */
     display: block;
     width: 100%;
     font-size: 1rem;
@@ -165,7 +154,7 @@ button.check{
     color: var(--faint);
 }
 
-.alldone:after, .allundone:after, .nonedeleted:after{
+.alldone::after, .allundone::after, .nonedeleted::after, .allempty::after{
     display: block;
     width: 100%;
     font-size: 1rem;
@@ -173,13 +162,16 @@ button.check{
     color: var(--faint);
 }
 
-.alldone:after{
-    content: 'All tasks done. Have a break!';
+.allempty::after{
+    content: 'Nothing to show yet ...';
 }
-.allundone:after{
-    content: 'No tasks done! Get to work!';
+.alldone::after{
+    content: 'No tasks to do here ...';
 }
-.nonedeleted:after{
+.allundone::after{
+    content: 'No tasks done yet ...';
+}
+.nonedeleted::after{
     content: 'No items in the trash ...';
 }
 

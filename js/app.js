@@ -64,9 +64,10 @@ if (themeData) {
 }
 
 // Clean Interface on Start
-if (tdList.childElementCount == 0) {
+if (LIST.length === 0) {
     filterControl.style.display = "none";
     secondaryOptions.style.display = "none";
+    tdList.classList.add("allempty");
 }
 
 
@@ -344,22 +345,37 @@ function descBoxes(newItem){
 }
 
 
+// ---------- View STATES ---------- //
+
 function viewAll() {
 view = "ALL_view";
 tdList.classList.remove('alldone');
 tdList.classList.remove('allundone');
 tdList.classList.remove('nonedeleted');
+tdList.classList.remove('allempty');
 const all_items = LIST.filter(item => item.trash === false);
 while (tdList.firstChild) {
     tdList.removeChild(tdList.lastChild);
 }
 loadTodo(all_items);
+if (all_items.length === 0){
+    tdList.classList.remove('alldone');
+    tdList.classList.remove('allundone');
+    tdList.classList.remove('nonedeleted');
+    tdList.classList.add('allempty');
+} else {
+    tdList.classList.remove('allempty');
+    tdList.classList.remove('alldone');
+    tdList.classList.remove('allundone');
+    tdList.classList.remove('nonedeleted');
+    }
 }
 
 function viewTrash() {
 view = "TRASH_view";
 tdList.classList.remove('alldone');
 tdList.classList.remove('allundone');
+tdList.classList.remove('allempty');
 const trash_items = LIST.filter(item => item.trash === true);
 while (tdList.firstChild) {
     tdList.removeChild(tdList.lastChild);
@@ -368,15 +384,15 @@ loadTodo(trash_items);
 if (trash_items.length === 0){
     tdList.classList.remove('alldone');
     tdList.classList.remove('allundone');
+    tdList.classList.remove('allempty');
     tdList.classList.add('nonedeleted');
 } else {
+    tdList.classList.remove('allempty');
     tdList.classList.remove('alldone');
     tdList.classList.remove('allundone');
     tdList.classList.remove('nonedeleted');
+    }
 }
-}
-
-// ---------- View STATES ---------- //
 
 function viewDone() {
 view = "DONE_view";
@@ -386,14 +402,16 @@ while (tdList.firstChild) {
 }
 loadTodo(done_items);
 if (done_items.length === 0){
+    tdList.classList.remove('allempty');
     tdList.classList.remove('alldone');
     tdList.classList.remove('nonedeleted');
     tdList.classList.add('allundone');
 } else {
+    tdList.classList.remove('allempty');
     tdList.classList.remove('alldone');
     tdList.classList.remove('allundone');
     tdList.classList.remove('nonedeleted');
-}
+    }
 }
 
 function viewTodos() {
@@ -413,7 +431,7 @@ if (todo_items.length === 0){
     tdList.classList.remove('alldone');
     tdList.classList.remove('allundone');
     tdList.classList.remove('nonedeleted');
-}
+    }
 }
 
 // Enabling Listeners on VIEW BUTTONS
@@ -564,7 +582,6 @@ function drop(event) {
     // -------- TRASH Drop Stuff ---------- //
     } else if (elTarget == trash) {
     LIST[elToDrop.id].trash = true;
-    elToDrop.classList.add('deleted');
     elToDrop.style.display = "none";
     //remove any residues from the drag event
     elTarget.classList.remove('dragenter-btn');
