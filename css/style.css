@@ -405,29 +405,14 @@ textarea.editForm{
 }
 
 #closeBtn{
-    width: 28px;
-    height: 28px;
     margin: 0;
     padding: 0;
-    border-radius: 50%;
-    border: 1px solid var(--main);
     filter: var(--glow);
+    font-size: 1.2rem;
 }
-#closeBtn:hover{
-    border-color: #e74343;
-    cursor: pointer;
-}
-#closeBtn:hover h5{
+#closeBtn i:hover{
     color: #e74343;
-}
-
-#closeBtn h5{
-    font-size: 1.8rem;
-    line-height: 1.6rem;
-    vertical-align: center;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+    cursor: pointer;
 }
 
 #w-body{
@@ -447,15 +432,15 @@ textarea.editForm{
     border-bottom: 0;
 }
 .w-body-part button{
-    border: 1px solid var(--main);
-    border-radius: 8px;
     padding: 10px 10px;
 }
-.w-body-part button:hover{
-    border: none;
-    box-shadow: var(--inp-shadow);
+#clearList:hover{
+    color: #e74343;
+    border-bottom: 1px solid #e74343;
 }
-
+#clearList:hover i{
+    color: #e74343;
+}
 
 .opt{
     max-width: 250px;
@@ -496,8 +481,8 @@ select#visuals{
 /* CSS Arrow down for select */
 .arrow-down{
     position: absolute;
-    left: 92%;
-    top: 20%;
+    left: 93%;
+    top: 34%;
     width: 0; 
     height: 0; 
     border-left: 5px solid transparent;
