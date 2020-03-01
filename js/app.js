@@ -30,7 +30,6 @@ let visualCh = visuals.value;
 // Start Variables
 let LIST, id, theme, THEME, view;
 let newItemId = 0;
-
 inp.focus();
 
 // ENTER-KEY @ main INPUT
@@ -40,6 +39,33 @@ inp.addEventListener('keypress', function (e) {
 		add.click();
     }
 });
+
+// fetch TODO-key from localStorage
+let data = localStorage.getItem("TODO");
+if (data) {
+    LIST = JSON.parse(data);
+    retrieveTodo(LIST);
+    id = LIST.length;
+} else {
+    LIST = [];
+    id = 0;
+}
+
+// fetch THEME-key from localStorage
+let themeData = localStorage.getItem("THEME");
+if (themeData) {
+    themeChanger(themeData);
+    visuals.selectedIndex = `${themeData}`;
+} else {
+    themeData = '0';
+    localStorage.setItem('THEME', `${theme}`);
+}
+
+// Clean Interface on Start
+if (tdList.childElementCount == 0) {
+    filterControl.style.display = "none";
+    secondaryOptions.style.display = "none";
+}
 
 
 // RETRIEVING LIST from localStorage
@@ -117,35 +143,14 @@ function retrieveTodo(array){
         newItem.nextSibling.id = `descRow-${newItem.id}`;  // distribute id to desc row
         newItem.nextSibling.firstChild.firstChild.id = `descArea-${newItem.id}`;
         descBoxes(newItem);
+        
         newItemId++;  // it's crucial to up the html ID and stay in sync with LIST array
+
         })
 
     viewAll();
     all.click();
 }
-
-
-// fetch TODO-key from localStorage
-let data = localStorage.getItem("TODO");
-if (data) {
-    LIST = JSON.parse(data);
-    retrieveTodo(LIST);
-    id = LIST.length;
-} else {
-    LIST = [];
-    id = 0;
-}
-
-// fetch THEME-key from localStorage
-let themeData = localStorage.getItem("THEME");
-if (themeData) {
-    themeChanger(themeData);
-    visuals.selectedIndex = `${themeData}`;
-} else {
-    themeData = '0';
-    localStorage.setItem('THEME', `${theme}`);
-}
-
 
 
 // ADD a NEW todo item to LIST array
@@ -175,12 +180,6 @@ const clearConfirm = confirm("REALLY? This will erase all your TODOs.");
 })
 
 
-// Clean Interface on Start
-if (tdList.childElementCount == 0) {
-    filterControl.style.display = "none";
-    secondaryOptions.style.display = "none";
-}
-
 // CREATE new item on PLUS-Click
 add.addEventListener('click', function(){
 
@@ -199,7 +198,7 @@ add.addEventListener('click', function(){
 })
 
 
-// CREATE Item
+// CREATE or REBUILD Item
 function createItem(){
 
     let toDo = inp.value;
@@ -375,6 +374,8 @@ if (trash_items.length === 0){
 }
 }
 
+// ---------- View STATES ---------- //
+
 function viewDone() {
 view = "DONE_view";
 const done_items = LIST.filter(item => item.done === true && item.trash === false);
@@ -474,20 +475,12 @@ trash.addEventListener('dragleave', handleDragLeave, false);
 emptyTrash.addEventListener('click', () => {
     view = "TRASH_view";
 
-    // LIST.forEach(item => {
-    //     if (item.trash === true) {
-    //        LIST.splice(item.id);
-    //        console.log(LIST);
-    //     }
-    // });
-
     for( let i = 0; i < LIST.length; i++){ 
         if ( LIST[i].trash === true) {
           LIST.splice(i, 1); 
           i--;                  // for every spliced item i needs to be reset
         }
      }
-     
 
     // Redistribution of HTML ID and LIST ID
     let todos = document.querySelectorAll(".todo");
@@ -512,13 +505,9 @@ emptyTrash.addEventListener('click', () => {
     viewTrash();
 });
 
-// DND functionality
-// The Table (#tdList) has enabling attributes set in HTML (index.html)
+// ---------- DRAG N DROP ---------- //
 
-// convenient insertAfter if useful for later (not in use)
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
+// The Table (#tdList) has enabling attributes set in HTML (index.html)
 
 //  Permission to drop
 function allowDrop(event) {
@@ -559,6 +548,7 @@ function drop(event) {
     });
     updateList(LIST);
     
+    // Update VIEW STATES 
     if (view == "ALL_view"){
         viewAll();
     } else if (view == "TODO_view") {
@@ -581,10 +571,10 @@ function drop(event) {
 }
 
 
-
-// STYLE of DnD - functions
+// STYLE of DND - functions
 // EventListeners of each todo are set during creation 
 // this or e.target is the current hover target
+
 function handleDragEnter(e) {
     if (e.target == trash) {
         trash.classList.toggle('dragenter-btn');
@@ -602,7 +592,7 @@ function handleDragLeave(e) {
 }
 
 
-// SETTINGS WINDOW
+// ---------- SETTINGS WINDOW ---------- //
 // SETTINGS Button
 let elementIsClicked = false;
 
@@ -636,17 +626,14 @@ function closeWindow() {
 }
 
 
-// THEMEs
+// ---------- THEMEs ---------- //
 
 // VISUALS CHOICE
 
 visuals.addEventListener("change", () => {
-
     themeData = visuals.value;
     themeChanger(themeData);
-
 })
-
 
 function themeChanger(themeData){
 
@@ -801,7 +788,8 @@ switch (themeData) {
         localStorage.setItem('THEME', `${theme}`);
         break;
 
-    case '0': //default
+    // BATH (DEFAULT)
+    case '0':
     root.style.setProperty('--main', "#555555");
             root.style.setProperty('--bg-color', "#e0e5ec");
             root.style.setProperty('--main-bg', "linear-gradient(145deg, #f0f5fd, #caced4)");
@@ -817,6 +805,8 @@ localStorage.setItem('THEME', `${themeData}`);
     
 }
 
+
+// ---------- EXPERIMENTAL STUFF ---------- //
 
 // TESTING SORT
 
@@ -862,6 +852,5 @@ function VueC(trashState, doneState) {
             loadTodo(afterDone);
     }
 }
-
 
 // all = VueC(false); only todos = VueC(false, false); only done's = VueC(false, true);
