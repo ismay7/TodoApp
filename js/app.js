@@ -58,7 +58,9 @@ if (themeData) {
     visuals.selectedIndex = `${themeData}`;
 } else {
     themeData = '0';
-    localStorage.setItem('THEME', `${theme}`);
+    themeChanger(themeData);
+    visuals.selectedIndex = `${themeData}`;
+    localStorage.setItem('THEME', `${themeData}`);
 }
 
 // Clean Interface on Start
@@ -649,7 +651,6 @@ switch (themeData) {
         root.style.setProperty('--faint', "#eeeeee");
         themeColor.setAttribute("content", "#2e2e2e");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        localStorage.setItem('THEME', `${theme}`);
         break;
     
     // ROSE
@@ -661,7 +662,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #c08b9d, inset -9px -9px 18px #ffc3dd");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e7a7bd");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     // CITRUS
@@ -673,7 +673,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #bcbe82, inset -9px -9px 18px #ffffb8");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e3e59d");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     // LIME
@@ -685,7 +684,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7ec084, inset -9px -9px 18px #b2ffba");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#98e79f");
-        localStorage.setItem('THEME', `${theme}`);
         break;
     
     //PEACH
@@ -697,7 +695,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #d48e78, inset -9px -9px 18px #ffc8aa");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#ffab91");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     // LAVENDER
@@ -709,7 +706,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #9590ca, inset -9px -9px 18px #d3caff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#b4adf3");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     // BABYBLUE
@@ -721,7 +717,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7da1d4, inset -9px -9px 18px #b1e3ff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#97c2ff");
-        localStorage.setItem('THEME', `${theme}`);
         break;
     
     //ROYALBLUE
@@ -734,7 +729,6 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#364edf");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     //SEAGREEN
@@ -747,7 +741,6 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#00876c");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        localStorage.setItem('THEME', `${theme}`);
         break;
     
     //MAGURO
@@ -760,8 +753,6 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#89212a");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-
-        localStorage.setItem('THEME', `${theme}`);
         break;
     
     // LAGOON
@@ -773,7 +764,6 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 19px 19px 37px #4fa79e, inset -19px -19px 37px #77fbec");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#63d1c5");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     //VEGAS GOLD
@@ -785,22 +775,21 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 19px 19px 38px #a29348, inset -19px -19px 38px #e8d368");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#C5B358");
-        localStorage.setItem('THEME', `${theme}`);
         break;
 
     // BATH (DEFAULT)
     case '0':
-    root.style.setProperty('--main', "#555555");
-            root.style.setProperty('--bg-color', "#e0e5ec");
-            root.style.setProperty('--main-bg', "linear-gradient(145deg, #f0f5fd, #caced4)");
-            root.style.setProperty('--main-bs', "11px 11px 19px #b8bcc2, -11px -11px 19px #ffffff");
-            root.style.setProperty('--inp-shadow', "inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff");
-            root.style.setProperty('--faint', "#adadad");
-            themeColor.setAttribute("content", "#e0e5ec");
-            localStorage.setItem('THEME', `${theme}`);
-            break;
+        root.style.setProperty('--main', "#555555");
+        root.style.setProperty('--bg-color', "#e0e5ec");
+        root.style.setProperty('--main-bg', "linear-gradient(145deg, #f0f5fd, #caced4)");
+        root.style.setProperty('--main-bs', "11px 11px 19px #b8bcc2, -11px -11px 19px #ffffff");
+        root.style.setProperty('--inp-shadow', "inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff");
+        root.style.setProperty('--faint', "#adadad");
+        themeColor.setAttribute("content", "#e0e5ec");
+        break;
 
 }
+
 localStorage.setItem('THEME', `${themeData}`);
     
 }

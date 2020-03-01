@@ -23,16 +23,15 @@ select {
     background: transparent;
 }
 
-:root{
-
 /* THEME DEFAULT */
+/* :root{
     --main: #555;
     --bg-color: #e0e5ec;
     --main-bg: linear-gradient(145deg, #f0f5fd, #caced4);
     --main-bs: 11px 11px 19px #b8bcc2, -11px -11px 19px #ffffff;
     --inp-shadow: inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff;
     --faint: #adadad;
-}
+} */
 
 /* PSEUDO_SELECTORS */
 ::selection{
