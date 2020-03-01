@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#dddddd">
+    <link rel="manifest" href="./app.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    
+
+    <title>TodoApp</title>
+</head>
+<body>
+    <main id="container">
+
+        <div id="todoBox">
+            <h1>TodoApp</h1>
+            <p id="subtitle">Soft UI</p>
+
+            <div id="insertBox">
+                <input id="inp" type="text" placeholder="What do you have TODO?"><button id="add">+</button>
+            </div>
+           
+            <div id="filterControl">
+                <button class="options-btn" id="all">all</button>
+                <button class="options-btn" id="tasktodo">to do</button>
+                <button class="options-btn" id="taskdone">completed</button>
+            </div>
+
+            <table id="tdList" class="targetzone" ondragover="allowDrop(event)"></table>
+
+            <div id="secondaryOptions">
+                <button class="options-btn" id="trash" ondragover="allowDrop(event)" ondrop="drop(event)">
+                    <i class="far fa-trash-alt"></i> trash
+                </button>
+                <button class="options-btn" id="emptyTrash" ondragover="allowDrop(event)" ondrop="drop(event)">
+                    <i class="fas fa-ban"></i> empty trash
+                </button>
+                
+            </div>
+            
+
+        </div>
+
+            <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()"></i>
+        
+
+        <!-- SETTINGS WINDOW -->
+        <div id="shade">
+            <div id="popup">
+                <div id="w-header">
+                    <h5 id="w-title">Settings</h5>
+                    <div id="closeBtn"><h5>x</h5></div>
+                </div>
+                <div id="w-body">
+                    <div class="w-body-part">
+                        <p class="opt"><strong>VISUALS</strong><br> choose your theme</p> 
+
+                        <div class="select-wrapper">
+                            <div class="arrow-down"></div>
+                            <select id="visuals">
+                                <option class="vis-opt" value="0" selected="selected">Bath (default)</option>
+                                <option class="vis-opt" value="1">Night Mode</option>
+                                <option class="vis-opt" value="2">Rose</option>
+                                <option class="vis-opt" value="3">Citrus</option>
+                                <option class="vis-opt" value="4">Lime</option>
+                                <option class="vis-opt" value="5">Salmon</option>
+                                <option class="vis-opt" value="6">Lavender</option>
+                                <option class="vis-opt" value="7">Baby Blue</option>
+                                <option class="vis-opt" value="8">Royal Blue</option>
+                                <option class="vis-opt" value="9">Sea Green</option>
+                                <option class="vis-opt" value="10">Maguro</option>
+                                <option class="vis-opt" value="11">Lagoon</option>
+                                <option class="vis-opt" value="12">Vegas Gold</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="w-body-part">
+                        <p class="opt"><strong>RESET</strong></p>
+                        <button class="options-btn" id="clearList"><i class="fas fa-bolt"></i> clear storage
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+       </div>   <!-- End of Shade -->
+
+    </main>
+    
+    <!-- register service worker -->
+    <script>
+        if ('serviceWorker' in navigator){
+          window.addEventListener('load', () => {
+             navigator.serviceWorker.register('./service-worker.js')
+          .then(() => { console.log('[ GWD ] Service Worker Registered'); });
+         });
+       }
+      </script>
+
+<script src="./js/app.js"></script>
+</body>
+</html>
