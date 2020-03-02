@@ -61,6 +61,7 @@ if (themeData) {
     themenr = THEME[0].theme;
     darkmode = THEME[0].darkui;
     themeChanger(themenr, darkmode);
+    visuals.selectedIndex = themenr;
 } else {
     themenr = '0'; darkmode = false;
     THEME.push({theme: themenr, darkui: darkmode});
@@ -74,7 +75,6 @@ if (LIST.length === 0) {
     secondaryOptions.style.display = "none";
     tdList.classList.add("allempty");
 }
-
 
 // RETRIEVING LIST from localStorage
 
@@ -443,15 +443,12 @@ if (todo_items.length === 0){
 all.addEventListener('click', () => {
     viewAll();
 })
-
 tasktodo.addEventListener('click', () => {
     viewTodos(); 
 })
-
 taskdone.addEventListener('click', () => {
     viewDone();
 })
-
 trash.addEventListener('click', () => {
     viewTrash();
 })
@@ -663,6 +660,7 @@ nightIcon.addEventListener('click', () => {
         darkmode = false;
         THEME[0].darkui = false;
         themeChanger(themenr);
+        updateTheme(THEME);
     }
 
 })
@@ -879,6 +877,7 @@ switch (themenr) {
 
 
 // ---------- EXPERIMENTAL STUFF ---------- //
+
 
 // TESTING SORT
 
