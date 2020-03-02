@@ -198,6 +198,10 @@ button.check{
 }
 
 
+.todo{
+    animation: grow-Y 300ms linear;
+}
+
 td{
     padding: 10px 12px;
 }

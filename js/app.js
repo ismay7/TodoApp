@@ -104,7 +104,7 @@ function loadItem(toDo, toDoDesc, id, done, trash){
     descCell = descRow.insertCell(0);
     descCell.setAttribute('colspan','3');
     descCell.innerHTML =
-    `<textarea class="desc-area grow-Y hidden" rows="10" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
+    `<textarea class="desc-area grow-Y hidden" rows="7" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
 
     markDone(newItem);
     editItem(newItem);
@@ -239,7 +239,7 @@ function createItem(){
     descCell = descRow.insertCell(0);
     descCell.setAttribute('colspan','3');
     descCell.innerHTML =
-    `<textarea class="desc-area grow-Y hidden" id="descArea-${newItem.id}" rows="10" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
+    `<textarea class="desc-area grow-Y hidden" id="descArea-${newItem.id}" rows="7" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
 
     filterControl.style.display = "flex";
     secondaryOptions.style.display = "flex";
