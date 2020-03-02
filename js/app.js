@@ -227,7 +227,7 @@ function createItem(){
     <td class="title">${toDo}</td>
     <td><button class="check"><i class="fas fa-check"></i></button></td>`;
 
-    newItem.classList.add("grow-Y");   // Animating Todos
+    // newItem.classList.add("grow-Y");   // Animating Todos
 
     tdList.appendChild(newItem);
     // tdList.insertBefore(newItem, tdList.firstElementChild);

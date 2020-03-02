@@ -41,7 +41,9 @@ html {
 #container{
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
     background-color: var(--bg-color);
     min-height: 100vh;
 }
@@ -49,6 +51,8 @@ html {
 #todoBox{
     margin: 30px 12px;
     max-width: 600px;
+    align-self: center;
+    flex-grow: 1;
 }
 @media only screen and (max-width: 414px) {
     #tdList{
@@ -197,11 +201,6 @@ button.check{
     animation: shrink 800ms ease-in-out 1;
 }
 
-
-.todo{
-    animation: grow-Y 300ms linear;
-}
-
 td{
     padding: 10px 12px;
 }
@@ -313,22 +312,7 @@ textarea.editForm{
    display: none;
 }
 
-
 /* ANIMATIONS */
-@keyframes neon2 {
-    from {
-        background: linear-gradient(145deg, #c7c7c7, #ececec);
-    box-shadow:  5px 5px 37px #cecece, 
-                 -5px -5px 37px #ececec;
-      }
-      to {
-        background: linear-gradient(145deg, #ececec, #c7c7c7); box-shadow: 15px 15px 30px #9b9b9b, -15px -15px 30px #ffffff;
-      }
-    } 
-
-    .color{
-        color: #313131;
-    }
 
 @keyframes grow {
     from { transform: scale(0) }
@@ -357,6 +341,16 @@ textarea.editForm{
     cursor: pointer;
     color: var(--main);
     filter: var(--glow);
+}
+
+/* FOOTER */
+#footer{
+    width: 100%;
+    flex-shrink: 0;
+    z-index: 5;
+    text-align: center;
+    margin: 80px auto 25px auto;
+    font-size: 0.7rem;
 }
 
 /* POP-UP STUFF */
