@@ -29,10 +29,11 @@ const visOpt = document.querySelectorAll(".vis-opt");
 let visualCh = visuals.value;
 
 // Start Variables
-let LIST, id, theme, THEME, view;
+let LIST, id, view;
 let newItemId = 0;
 inp.focus();
-nightmode = false;
+let THEME = [];
+let darkmode = false;
 
 // ENTER-KEY @ main INPUT
 inp.addEventListener('keypress', function (e) {
@@ -54,15 +55,17 @@ if (data) {
 }
 
 // fetch THEME-key from localStorage
-let themeData = localStorage.getItem("THEME");
+let themeData = localStorage.getItem("THEMEDATA");
 if (themeData) {
-    themeChanger(themeData);
-    visuals.selectedIndex = `${themeData}`;
+    THEME = JSON.parse(themeData);
+    themenr = THEME[0].theme;
+    darkmode = THEME[0].darkui;
+    themeChanger(themenr, darkmode);
 } else {
-    themeData = '0';
-    themeChanger(themeData);
-    visuals.selectedIndex = `${themeData}`;
-    localStorage.setItem('THEME', `${themeData}`);
+    themenr = '0'; darkmode = false;
+    THEME.push({theme: themenr, darkui: darkmode});
+    themeChanger(themenr, darkmode);
+    updateTheme(THEME);
 }
 
 // Clean Interface on Start
@@ -101,7 +104,7 @@ function loadItem(toDo, toDoDesc, id, done, trash){
     descCell = descRow.insertCell(0);
     descCell.setAttribute('colspan','3');
     descCell.innerHTML =
-    `<textarea class="desc-area grow-Y hidden" rows="5" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
+    `<textarea class="desc-area grow-Y hidden" rows="10" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
 
     markDone(newItem);
     editItem(newItem);
@@ -236,7 +239,7 @@ function createItem(){
     descCell = descRow.insertCell(0);
     descCell.setAttribute('colspan','3');
     descCell.innerHTML =
-    `<textarea class="desc-area grow-Y hidden" id="descArea-${newItem.id}" rows="5" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
+    `<textarea class="desc-area grow-Y hidden" id="descArea-${newItem.id}" rows="10" placeholder="Write your notes in here ...">${toDoDesc}</textarea>`;
 
     filterControl.style.display = "flex";
     secondaryOptions.style.display = "flex";
@@ -651,17 +654,20 @@ function closeWindow() {
 
 nightIcon.addEventListener('click', () => {
 
-    if (nightmode === false) {
-        nightmode = true;
-        nightMode();
+    if (darkmode === false) {
+        darkmode = true;
+        THEME[0].darkui = darkmode;
+        darkMode();
+        updateTheme(THEME);
         } else {
-            nightmode = false;
-            themeChanger(themeData);
+        darkmode = false;
+        THEME[0].darkui = false;
+        themeChanger(themenr);
     }
 
 })
 
-function nightMode() {
+function darkMode() {
 
     root.style.setProperty('--bg-color', "#2e2e2e");
     root.style.setProperty('--main', "var(--night-color)");
@@ -678,16 +684,25 @@ function nightMode() {
 
 // ---------- THEMEs ---------- //
 
+function updateTheme(themeArray){
+    localStorage.setItem("THEMEDATA", JSON.stringify(themeArray));
+}
+
+
 // VISUALS CHOICE
 
 visuals.addEventListener("change", () => {
-    themeData = visuals.value;
-    themeChanger(themeData);
+    themenr = visuals.value;
+    THEME[0].theme = themenr;
+    THEME[0].darkui = darkmode;
+    themeChanger(themenr, darkmode);
+    if (darkmode === true){ darkMode() };
+    updateTheme(THEME);
 })
 
-function themeChanger(themeData){
+function themeChanger(themenr){
 
-switch (themeData) {    
+switch (themenr) {
     
     // ROSE
     case '1':
@@ -700,7 +715,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #c08b9d, inset -9px -9px 18px #ffc3dd");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e7a7bd");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     // CITRUS
@@ -714,7 +729,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #bcbe82, inset -9px -9px 18px #ffffb8");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#e3e59d");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     // LIME
@@ -728,7 +743,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7ec084, inset -9px -9px 18px #b2ffba");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#98e79f");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
     
     //PEACH
@@ -742,7 +757,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #d48e78, inset -9px -9px 18px #ffc8aa");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#ffab91");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     // LAVENDER
@@ -756,7 +771,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #9590ca, inset -9px -9px 18px #d3caff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#b4adf3");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     // BABYBLUE
@@ -770,12 +785,12 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 9px 9px 18px #7da1d4, inset -9px -9px 18px #b1e3ff");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#97c2ff");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
     
     //ROYALBLUE
     case '7':
-        glow = 'brightness(140%)';
+        glow = 'brightness(150%)';
         root.style.setProperty('--main', "#dddddd");
         root.style.setProperty('--bg-color', "#364edf");
         root.style.setProperty('--night-color', "#364edf");
@@ -785,7 +800,7 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#364edf");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     //SEAGREEN
@@ -800,12 +815,12 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#00876c");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
     
     //MAGURO
     case '9':
-        glow = 'brightness(140%)';
+        glow = 'brightness(170%)';
         root.style.setProperty('--main', "#dddddd");
         root.style.setProperty('--bg-color', "#89212a");
         root.style.setProperty('--night-color', "#89212a");
@@ -815,7 +830,7 @@ switch (themeData) {
         root.style.setProperty('--faint', "#b9b9b9");
         themeColor.setAttribute("content", "#89212a");
         visOpt.forEach(opt => {opt.style.color = "#272727";});
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
     
     // LAGOON
@@ -829,7 +844,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 19px 19px 37px #4fa79e, inset -19px -19px 37px #77fbec");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#63d1c5");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     //VEGAS GOLD
@@ -843,7 +858,7 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 19px 19px 38px #a29348, inset -19px -19px 38px #e8d368");
         root.style.setProperty('--faint', "#313131");
         themeColor.setAttribute("content", "#C5B358");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
 
     // BATH (DEFAULT)
@@ -857,13 +872,9 @@ switch (themeData) {
         root.style.setProperty('--inp-shadow', "inset 11px 11px 19px #b8bcc2, inset -11px -11px 19px #ffffff");
         root.style.setProperty('--faint', "#adadad");
         themeColor.setAttribute("content", "#e0e5ec");
-        if (nightmode === true){ nightMode() };
+        if (darkmode === true){ darkMode() };
         break;
-
-}
-
-localStorage.setItem('THEME', `${themeData}`);
-    
+    }
 }
 
 
