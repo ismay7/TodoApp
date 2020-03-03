@@ -145,12 +145,6 @@ button.check{
     opacity: 0;
 }
 
-.dragOver{
-    /* box-shadow: 0 -5px 5px -5px #d80053; */
-    border: 2px dashed var(--main);
-    filter: var(--glow);
-}
-
 
 #tdList{
     margin: 35px auto;
@@ -262,8 +256,13 @@ textarea.editForm{
     border-bottom: 1px solid var(--main);
 }
 
+.dragOver{
+    /* box-shadow: 0 -5px 5px -5px #d80053; */
+    border: 2px dashed var(--main);
+    filter: var(--glow);
+}
+
 .dragenter-btn{
-    border: 1px dashed var(--main);
     filter: var(--glow);
 }
 
@@ -272,6 +271,12 @@ textarea.editForm{
     justify-content: space-between;
     text-align: center;
     filter: var(--glow);
+}
+
+.drag-general{
+    border: 1px dashed var(--faint);
+    border-radius: 5px;
+    padding: 10px 20px;
 }
 
 .desc-btn{

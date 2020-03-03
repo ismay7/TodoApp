@@ -13,7 +13,7 @@
     <title>TodoApp</title>
 </head>
 <body>
-    <main id="container">
+    <main id="container" ondragover="allowDrop(event)" ondrop="drop(event)">
 
         <div id="todoBox">
             <h1>TodoApp</h1>
@@ -43,8 +43,8 @@
 
         </div>
 
-            <i class="fas fa-cloud-moon" id="night-icon"></i>
-            <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()"></i>
+            <i class="fas fa-cloud-moon" id="night-icon" title="Night Mode"></i>
+            <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()" title="Settings"></i>
         
 
         <!-- SETTINGS WINDOW -->

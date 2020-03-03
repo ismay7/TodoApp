@@ -13,6 +13,7 @@ const all = document.querySelector("#all");
 const tasktodo = document.querySelector("#tasktodo");
 const taskdone = document.querySelector("#taskdone");
 const trash = document.querySelector("#trash");
+const restore = document.querySelector("#restore");
 const emptyTrash = document.querySelector("#emptyTrash");
 
 // Description Boxes
@@ -497,12 +498,16 @@ trash.addEventListener('dragleave', handleDragLeave, false);
 emptyTrash.addEventListener('click', () => {
     view = "TRASH_view";
 
-    for( let i = 0; i < LIST.length; i++){ 
-        if ( LIST[i].trash === true) {
-          LIST.splice(i, 1); 
-          i--;                  // for every spliced item i needs to be reset
-        }
-     }
+    const deleteConfirm = confirm("This will permanently delete your trashed items. OK?")
+
+    if (deleteConfirm) {
+        for( let i = 0; i < LIST.length; i++){ 
+            if ( LIST[i].trash === true) {
+              LIST.splice(i, 1); 
+              i--;                  // for every spliced item i needs to be reset
+            }
+         }
+    }
 
     // Redistribution of HTML ID and LIST ID
     let todos = document.querySelectorAll(".todo");
@@ -539,7 +544,15 @@ function allowDrop(event) {
 // The DRAG event
 function drag(event) {
     event.dataTransfer.setData("text", event.target.id);
+
+    if (view !== "TRASH_view"){
+        trash.classList.add("drag-general");
+        trash.innerHTML = '<i class="far fa-trash-alt"></i> drop trash';
+    } else if (view === "TRASH_view"){
+        trash.classList.add("drag-general");
+        trash.innerHTML = '<i class="fas fa-recycle"></i> restore';
     }
+}
 
 // The DROP event
 function drop(event) {
@@ -554,9 +567,6 @@ function drop(event) {
 
     LIST.splice(elToDrop.id, 1);
     LIST.splice(elTarget.id, 0, dropObj);
-
-    // HTML changes
-    elTarget.classList.remove('dragOver');
 
     // Redistribution of HTML ID and LIST ID
     let todos = document.querySelectorAll(".todo");
@@ -583,12 +593,20 @@ function drop(event) {
 
     // -------- TRASH Drop Stuff ---------- //
     } else if (elTarget == trash) {
-    LIST[elToDrop.id].trash = true;
-    elToDrop.style.display = "none";
+        if (view !== "TRASH_view") {
+            LIST[elToDrop.id].trash = true;
+            elToDrop.style.display = "none";
+        } else {
+            LIST[elToDrop.id].trash = false; // restore
+            elToDrop.style.display = "none";
+        }
+        updateList(LIST);
+    } 
     //remove any residues from the drag event
-    elTarget.classList.remove('dragenter-btn');
-    updateList(LIST);
-    }
+    trash.innerHTML = '<i class="far fa-trash-alt"></i> trash';
+    elTarget.classList.remove('dragOver');
+    elTarget.classList.remove('drag-general');
+    trash.classList.remove("drag-general");
 }
 
 
