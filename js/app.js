@@ -599,6 +599,7 @@ function drop(event) {
         } else {
             LIST[elToDrop.id].trash = false; // restore
             elToDrop.style.display = "none";
+            viewTrash();
         }
         updateList(LIST);
     } 
@@ -895,6 +896,14 @@ switch (themenr) {
 
 
 // ---------- EXPERIMENTAL STUFF ---------- //
+
+const createUser = document.querySelector('#register');
+
+createUser.addEventListener('click', () => {
+    let user = prompt('What is your username?', 'username');
+let pass = prompt('What is your password?', 'password');
+alert(`OK, ${user}! Let's load your TodoList ...`);
+})
 
 
 // TESTING SORT

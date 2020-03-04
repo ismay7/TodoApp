@@ -67,11 +67,11 @@ html {
 h1{
     text-align: center;
     color: var(--main);
-    font-size: 3rem;
+    font-size: 2.7rem;
     filter: var(--glow);
 }
 #subtitle{
-    font-size: 1.3rem;
+    font-size: 1rem;
     text-align: center;
     margin-top: 2px;
     filter: var(--glow);
@@ -82,7 +82,7 @@ h1{
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    margin: 3rem 1rem 2rem 0;
+    margin: 2rem 1rem 2rem 0;
 }
 
 input#inp{
@@ -90,6 +90,7 @@ input#inp{
     border-radius: 10px;
     background: var(--bg-color);
     color: var(--main);
+    -webkit-box-shadow: var(--inp-shadow);
     box-shadow: var(--inp-shadow);
     padding: 0.8rem 1.2rem;
     font-size: 1.3rem;
@@ -118,6 +119,7 @@ button.check{
     border-radius: 8px;
     background: var(--main-bg);
     box-shadow:  var(--inp-shadow);
+    -webkit-box-shadow: var(--inp-shadow);
 }
 
 /* ICONS */
@@ -171,21 +173,22 @@ button.check{
     display: block;
     width: 100%;
     font-size: 1rem;
+    font-style: italic;
     text-align: center;
     color: var(--faint);
 }
 
 .allempty::after{
-    content: 'Nothing to show yet ...';
+    content: 'Nothing to show yet';
 }
 .alldone::after{
-    content: 'No tasks to do here ...';
+    content: 'No tasks to do here';
 }
 .allundone::after{
-    content: 'No tasks done yet ...';
+    content: 'No tasks done yet';
 }
 .nonedeleted::after{
-    content: 'No items in the trash ...';
+    content: 'No items in the trash';
 }
 
 .grow{
@@ -222,14 +225,12 @@ td:last-child{
 textarea.editForm{
     padding: 8px 5px;
     text-align: center;
-    font-size: 1.7rem;
-    line-height: 1.7rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
     color: var(--main);
-    filter: var(--glow);
     border-radius: 3px;
     box-shadow: var(--inp-shadow);
     background-color: var(--bg-color);
-    /* border: 2px dashed var(--main); */
     resize: none;
     word-break: break-all;
 }
@@ -310,6 +311,7 @@ textarea.editForm{
     font-size: 1.1rem;
     padding: 12px 12px;
     border-radius: 4px;
+    -webkit-box-shadow: var(--inp-shadow);
     box-shadow: var(--inp-shadow);
     background-color: var(--bg-color);
 }
@@ -348,13 +350,33 @@ textarea.editForm{
     filter: var(--glow);
 }
 
+#user-box{
+    text-align: center;
+}
+
+/*  LOGIN REGISTER Buttons etc.  */
+.userBtn{
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--main);
+    filter: var(--glow);
+    border-bottom: 1px solid transparent;
+}
+
+.userBtn:hover{
+    border-bottom: 1px solid var(--main);
+}
+
 /* FOOTER */
 #footer{
     width: 100%;
     flex-shrink: 0;
     z-index: 5;
     text-align: center;
-    margin: 80px auto 25px auto;
+    margin: 40px auto 25px auto;
     font-size: 0.7rem;
 }
 
@@ -413,9 +435,10 @@ textarea.editForm{
 #closeBtn{
     margin: 0;
     padding: 3px 5px 0 0;
-    filter: var(--glow);
     font-size: 1.2rem;
+    filter: var(--glow);
 }
+
 #closeBtn i:hover{
     color: #e74343;
     cursor: pointer;
@@ -494,7 +517,6 @@ select#visuals{
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid var(--main);
-    filter: var(--glow);
 }
 
 
