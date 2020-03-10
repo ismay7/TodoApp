@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <link rel="manifest" href="./app.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    
+
 
     <title>TodoApp</title>
 </head>
+
 <body>
     <main id="container" ondragover="allowDrop(event)" ondrop="drop(event)">
 
@@ -20,9 +22,10 @@
             <p id="subtitle">Soft UI</p>
 
             <div id="insertBox">
-                <input id="inp" type="text" placeholder="What do you have TODO?"><button id="add"><i class="fas fa-plus"></i></button>
+                <input id="inp" type="text" placeholder="What do you have TODO?"><button id="add"><i
+                        class="fas fa-plus"></i></button>
             </div>
-           
+
             <div id="filterControl">
                 <button class="options-btn" id="all">all</button>
                 <button class="options-btn" id="tasktodo">to do</button>
@@ -37,20 +40,20 @@
                 <button class="options-btn" id="emptyTrash" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <i class="fas fa-ban"></i> empty trash
                 </button>
-                
+
             </div>
 
         </div>
 
-            <i class="fas fa-cloud-moon" id="night-icon" title="Night Mode"></i>
+        <i class="fas fa-cloud-moon" id="night-icon" title="Night Mode"></i>
 
-            <div id="user-box">
-                <button class="userBtn" id="register">register</button>
-                <button class="userBtn" id="login">LOG IN</button>
-            </div>
+        <div id="user-box">
+            <button class="userBtn" id="register">register</button>
+            <button class="userBtn" id="login">LOG IN</button>
+        </div>
 
-            <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()" title="Settings"></i>
-        
+        <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()" title="Settings"></i>
+
 
         <!-- SETTINGS WINDOW -->
         <div id="shade">
@@ -61,7 +64,7 @@
                 </div>
                 <div id="w-body">
                     <div class="w-body-part">
-                        <p class="opt"><strong>VISUALS</strong><br>color scheme:</p> 
+                        <p class="opt"><strong>VISUALS</strong><br>color scheme:</p>
 
                         <div class="select-wrapper">
                             <div class="arrow-down"></div>
@@ -78,7 +81,7 @@
                                 <option class="vis-opt" value="9">Maguro</option>
                                 <option class="vis-opt" value="10">Lagoon</option>
                                 <option class="vis-opt" value="11">Vegas Gold</option>
-                              </select>
+                            </select>
                         </div>
                     </div>
                     <div class="w-body-part">
@@ -90,22 +93,23 @@
 
                 </div>
             </div>
-       </div>   <!-- End of Shade -->
-       <footer id="footer">
-           <span>© 2020 grüninger webdesign - v0.5.1</span>
-       </footer>
+        </div> <!-- End of Shade -->
+        <footer id="footer">
+            <span>© 2020 grüninger webdesign - v0.5.1</span>
+        </footer>
     </main>
-    
-<!-- Register service worker -->
-<script>
-    if ('serviceWorker' in navigator){
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js')
-        .then(() => { console.log('[ PWA ] Service Worker Registered'); });
-        });
-    }
+
+    <!-- Register service worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(() => { console.log('[ PWA ] Service Worker Registered'); });
+            });
+        }
     </script>
 
-<script src="./js/app.js"></script>
+    <script src="./app.js"></script>
 </body>
+
 </html>
