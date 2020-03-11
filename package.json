@@ -2,10 +2,10 @@
   "name": "todoapp",
   "version": "0.5.1",
   "description": "A simple Todolist web app",
-  "main": "nodeServer.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node nodeServer.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/ismay7/TodoApp#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "mongodb": "^3.5.4"
-  }
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
 }

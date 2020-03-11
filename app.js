@@ -1,5 +1,4 @@
 // GENERAL
-
 const inp = document.querySelector("#inp");
 const add = document.querySelector("#add");
 const todoBox = document.querySelector("#todoBox");
@@ -27,13 +26,15 @@ const nightIcon = document.querySelector("#night-icon");
 const themeColor = document.querySelector("meta[name=theme-color]");
 const visuals = document.querySelector("#visuals");
 const visOpt = document.querySelectorAll(".vis-opt");
-let visualCh = visuals.value;
+// let visualCh = visuals.value;
 
 // Start Variables
 let LIST, id, view;
 let newItemId = 0;
 inp.focus();
 let THEME = [];
+let themenr;
+let glow = 'none';
 let darkmode = false;
 
 // ENTER-KEY @ main INPUT
@@ -44,7 +45,21 @@ inp.addEventListener('keypress', function (e) {
     }
 });
 
-// fetch TODO-key from localStorage
+
+// FETCH json data as file
+function fetchData(List) {
+
+    fetch('/data', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(List),
+    })
+};
+
+
+// get TODO-key from localStorage
 let data = localStorage.getItem("TODO");
 if (data) {
     LIST = JSON.parse(data);
@@ -55,7 +70,7 @@ if (data) {
     id = 0;
 }
 
-// fetch THEME-key from localStorage
+// get THEME-key from localStorage
 let themeData = localStorage.getItem("THEMEDATA");
 if (themeData) {
     THEME = JSON.parse(themeData);
@@ -172,12 +187,15 @@ function addToDo(toDo, toDoDesc, id, done, trash) {
         done: false,
         trash: false
     })
+
+    fetchData(LIST);
 }
 
 // SAVING LIST and updating to localStorage
 function updateList(List) {
     localStorage.setItem("TODO", JSON.stringify(List));
 }
+
 
 // CLEAR Storage
 clearList.addEventListener('click', () => {
@@ -289,6 +307,7 @@ function markDone(newItem) {
         }
 
         updateList(LIST);
+        fetchData(LIST);
     })
 }
 
@@ -313,6 +332,7 @@ function editItem(newItem) {
             newItem.setAttribute('draggable', 'true');
             LIST[newItem.id].name = titleLoc.textContent;
             updateList(LIST);
+            fetchData(LIST);
         })  // End editing blur func
 
         // ENTER-key @ title-INPUT
@@ -344,6 +364,7 @@ function descBoxes(newItem) {
             currentArea.textContent = `${currentArea.value}`;
             LIST[newItem.id].desc = currentArea.textContent;
             updateList(LIST);
+            fetchData(LIST);
         })
     })
 }
@@ -526,6 +547,7 @@ emptyTrash.addEventListener('click', () => {
     // newItem.id = LIST[item.id].id;
 
     updateList(LIST);
+    fetchData(LIST);
     loadTodo(LIST);
     viewTrash();
 });
@@ -577,6 +599,7 @@ function drop(event) {
             item.id = itemid++;
         });
         updateList(LIST);
+        fetchData(LIST);
 
         // Update VIEW STATES 
         if (view == "ALL_view") {
@@ -600,6 +623,7 @@ function drop(event) {
             viewTrash();
         }
         updateList(LIST);
+        fetchData(LIST);
     }
     //remove any residues from the drag event
     trash.innerHTML = '<i class="far fa-trash-alt"></i> trash';
@@ -711,7 +735,7 @@ visuals.addEventListener("change", () => {
     THEME[0].theme = themenr;
     THEME[0].darkui = darkmode;
     themeChanger(themenr, darkmode);
-    if (darkmode === true) { darkMode() };
+    if (darkmode) { darkMode() };
     updateTheme(THEME);
 })
 
