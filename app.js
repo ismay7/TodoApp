@@ -46,8 +46,8 @@ inp.addEventListener('keypress', function (e) {
 });
 
 
-// FETCH json data as file
-function fetchData(List) {
+// send json data as file to server
+function exportData(List) {
 
     fetch('/data', {
         method: 'POST', // or 'PUT'
@@ -57,6 +57,23 @@ function fetchData(List) {
         body: JSON.stringify(List),
     })
 };
+
+// get JSON file from server
+function importData() {
+
+    fetch('./data/todos.json').then(response => {
+        return response.json();
+    }).then(data => {
+        LIST = data;
+        id = LIST.length;
+        retrieveTodo(LIST);
+        updateList(LIST);
+        console.log(data);
+    }).catch(err => {
+        if (err) throw err;
+    });
+
+}
 
 
 // get TODO-key from localStorage
@@ -188,7 +205,6 @@ function addToDo(toDo, toDoDesc, id, done, trash) {
         trash: false
     })
 
-    fetchData(LIST);
 }
 
 // SAVING LIST and updating to localStorage
@@ -307,7 +323,6 @@ function markDone(newItem) {
         }
 
         updateList(LIST);
-        fetchData(LIST);
     })
 }
 
@@ -332,7 +347,6 @@ function editItem(newItem) {
             newItem.setAttribute('draggable', 'true');
             LIST[newItem.id].name = titleLoc.textContent;
             updateList(LIST);
-            fetchData(LIST);
         })  // End editing blur func
 
         // ENTER-key @ title-INPUT
@@ -364,7 +378,6 @@ function descBoxes(newItem) {
             currentArea.textContent = `${currentArea.value}`;
             LIST[newItem.id].desc = currentArea.textContent;
             updateList(LIST);
-            fetchData(LIST);
         })
     })
 }
@@ -547,7 +560,6 @@ emptyTrash.addEventListener('click', () => {
     // newItem.id = LIST[item.id].id;
 
     updateList(LIST);
-    fetchData(LIST);
     loadTodo(LIST);
     viewTrash();
 });
@@ -599,7 +611,6 @@ function drop(event) {
             item.id = itemid++;
         });
         updateList(LIST);
-        fetchData(LIST);
 
         // Update VIEW STATES 
         if (view == "ALL_view") {
@@ -623,7 +634,6 @@ function drop(event) {
             viewTrash();
         }
         updateList(LIST);
-        fetchData(LIST);
     }
     //remove any residues from the drag event
     trash.innerHTML = '<i class="far fa-trash-alt"></i> trash';
@@ -919,13 +929,20 @@ function themeChanger(themenr) {
 
 // ---------- EXPERIMENTAL STUFF ---------- //
 
-const createUser = document.querySelector('#register');
+const exportBtn = document.querySelector('#export-btn');
+const importBtn = document.querySelector('#import-btn');
 
-createUser.addEventListener('click', () => {
-    let user = prompt('What is your username?', 'username');
-    let pass = prompt('What is your password?', 'password');
-    alert(`OK, ${user}! Let's load your TodoList ...`);
-})
+exportBtn.addEventListener('click', () => {
+    exportData(LIST);
+});
+
+importBtn.addEventListener('click', () => {
+    filterControl.style.display = "flex";
+    secondaryOptions.style.display = "flex";
+
+    importData();
+
+});
 
 
 // TESTING SORT

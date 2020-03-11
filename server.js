@@ -9,6 +9,8 @@ app.listen(3000, () => console.log('listening on port 3000...'));
 app.use(express.static(__dirname + '/'));
 app.use(express.json({ limit: '1mb' }));
 
+
+// rewrite JSON file when changes are invoked
 app.post('/data', (request, response) => {
     fs.writeFile('./data/todos.json', JSON.stringify(request.body), (err) => {
         if (err) throw err;
@@ -16,6 +18,7 @@ app.post('/data', (request, response) => {
     console.log('json file updated ...');
     response.end();
 });
+
 
 // MongoDB 
 
