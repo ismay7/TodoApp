@@ -56,6 +56,7 @@ function exportData(List) {
         },
         body: JSON.stringify(List),
     })
+    alert("Todo list has been saved!");
 };
 
 // get JSON file from server
@@ -68,7 +69,6 @@ function importData() {
         id = LIST.length;
         retrieveTodo(LIST);
         updateList(LIST);
-        console.log(data);
     }).catch(err => {
         if (err) throw err;
     });
