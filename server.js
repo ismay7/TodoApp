@@ -1,22 +1,41 @@
 // NODE.JS SERVER
-const http = require('http');
 const express = require('express');
-const app = express();
 const fs = require('fs');
+const path = require('path');
+const glob = require("glob");
+let COLL = [];
 
+const app = express();
 app.listen(3000, () => console.log('listening on port 3000...'));
 
 app.use(express.static(__dirname + '/'));
 app.use(express.json({ limit: '1mb' }));
 
 
-// rewrite JSON file when changes are invoked
-app.post('/data', (request, response) => {
-    fs.writeFile('./data/todos.json', JSON.stringify(request.body), (err) => {
+//read JSON files
+app.get('/files', (req, res) => {
+    fs.readdir('./data', (err, files) => {
+        if (err) { throw err } else {
+            COLL = [];
+            files.forEach(file => {
+                filename = file.split('.').slice(0, -1).join('.');
+                COLL.push(filename);
+            });
+            res.json(COLL);
+            res.end();
+        }
+    });
+})
+
+
+// write JSON file 
+app.post('/data', (req, res) => {
+    let listname = req.body.shift();
+    fs.writeFile(`./data/${listname}.json`, JSON.stringify(req.body), (err) => {
         if (err) throw err;
     });
     console.log('json file updated ...');
-    response.end();
+    res.end();
 });
 
 

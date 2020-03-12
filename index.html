@@ -19,7 +19,17 @@
 
         <div id="todoBox">
             <h1>TodoApp</h1>
-            <p id="subtitle">Soft UI</p>
+
+            <div id="coll-box">
+                <div id="coll-wrapper" class="select-wrapper">
+                    <div class="arrow-down"></div>
+                    <select id="collections">
+                        <option class="coll-opt" value="default">default</option>
+                    </select>
+                </div>
+                <button class="userBtn" id="export-btn"><i class="fas fa-cloud-upload-alt"></i> export ...</button>
+            </div>
+
 
             <div id="insertBox">
                 <input id="inp" type="text" placeholder="What do you have TODO?"><button id="add"><i
@@ -46,11 +56,6 @@
         </div>
 
         <i class="fas fa-cloud-moon" id="night-icon" title="Night Mode"></i>
-
-        <div id="user-box">
-            <button class="userBtn" id="export-btn"><i class="fas fa-cloud-upload-alt"></i> export</button>
-            <button class="userBtn" id="import-btn"><i class="fas fa-cloud-download-alt"></i> import</button>
-        </div>
 
         <i class="fas fa-sliders-h" id="set-icon" onclick="setWindow()" title="Settings"></i>
 
@@ -84,6 +89,7 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="w-body-part">
                         <p class="opt"><strong>RESET</strong></p>
                         <button class="options-btn" id="clearList"><i class="fas fa-bolt"></i> clear storage
@@ -95,7 +101,7 @@
             </div>
         </div> <!-- End of Shade -->
         <footer id="footer">
-            <span>© 2020 grüninger webdesign - v0.5.1</span>
+            <span>© 2020 grüninger webdesign - v0.6.0</span>
         </footer>
     </main>
 

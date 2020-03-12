@@ -28,6 +28,10 @@ const visuals = document.querySelector("#visuals");
 const visOpt = document.querySelectorAll(".vis-opt");
 // let visualCh = visuals.value;
 
+//LIST management
+const collections = document.querySelector('#collections');
+const collOptions = document.querySelectorAll('.coll-opt');
+
 // Start Variables
 let LIST, id, view;
 let newItemId = 0;
@@ -46,34 +50,101 @@ inp.addEventListener('keypress', function (e) {
 });
 
 
+fetch('/files').then(res => {
+    return res.json();
+}).then(data => {
+    COLL = data;
+    updateColl(COLL);
+    createOpt();
+    listToShow = collections.value;
+    importData(LIST, listToShow);
+    updateList(LIST);
+    // loadTODO();
+}).catch(err => {
+    if (err) throw err;
+});
+
+
+// create List Selection for exported lists
+function createOpt() {
+
+    while (collections.firstChild) {
+        collections.removeChild(collections.lastChild);
+    }
+
+    COLL.forEach(collItem => {
+        newOpt = document.createElement("option");
+        newOpt.value = collItem;
+        newOpt.innerHTML = collItem;
+        newOpt.classList.add("coll-opt");
+        collections.appendChild(newOpt);
+    });
+
+};
+
 // send json data as file to server
 function exportData(List) {
 
-    fetch('/data', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(List),
-    })
-    alert("Todo list has been saved!");
+    let savefile = prompt('Save file as:', `${collections.value}`);
+
+    if (savefile === "") { savefile = 'noName'; }
+
+    else if (savefile) {
+
+        List.unshift(savefile);
+        if (COLL.includes(savefile) !== true) {
+            COLL.push(savefile);
+        };
+        updateColl(COLL);
+
+        fetch('/data', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(List),
+        })
+        alert(`Todo list has been saved as ${savefile}!`);
+        List.shift();
+        createOpt();
+        collections.value = COLL[COLL.length - 1];
+    }
+    else {
+        return;
+    };
 };
 
 // get JSON file from server
-function importData() {
+function importData(List, listToShow) {
 
-    fetch('./data/todos.json').then(response => {
+    fetch(`./data/${listToShow}.json`).then(response => {
         return response.json();
     }).then(data => {
-        LIST = data;
-        id = LIST.length;
-        retrieveTodo(LIST);
-        updateList(LIST);
+        List = data;
+        id = List.length;
+        updateList(List);
+        loadTODO();
     }).catch(err => {
         if (err) throw err;
     });
 
-}
+};
+
+// choosing List to
+const exportBtn = document.querySelector('#export-btn');
+
+exportBtn.addEventListener('click', () => {
+    exportData(LIST);
+});
+
+collections.addEventListener('change', () => {
+    filterControl.style.display = "flex";
+    secondaryOptions.style.display = "flex";
+
+    listToShow = collections.value;
+    importData(LIST, listToShow);
+});
+
 
 
 // get TODO-key from localStorage
@@ -86,6 +157,17 @@ if (data) {
     LIST = [];
     id = 0;
 }
+
+// get TODOS from localStorage - forced
+function loadTODO() {
+    let data = localStorage.getItem("TODO");
+    LIST = JSON.parse(data);
+    retrieveTodo(LIST);
+    id = LIST.length;
+}
+
+
+
 
 // get THEME-key from localStorage
 let themeData = localStorage.getItem("THEMEDATA");
@@ -100,6 +182,16 @@ if (themeData) {
     THEME.push({ theme: themenr, darkui: darkmode });
     themeChanger(themenr, darkmode);
     updateTheme(THEME);
+}
+
+// get COLL-Key from localStorage
+let collData = localStorage.getItem("COLLDATA");
+if (collData) {
+    COLL = JSON.parse(collData);
+    createOpt();
+} else {
+    COLL = [];
+    createOpt();
 }
 
 // Clean Interface on Start
@@ -212,6 +304,10 @@ function updateList(List) {
     localStorage.setItem("TODO", JSON.stringify(List));
 }
 
+// SAVING COLL and updating to localStorage
+function updateColl(COLL) {
+    localStorage.setItem("COLLDATA", JSON.stringify(COLL));
+}
 
 // CLEAR Storage
 clearList.addEventListener('click', () => {
@@ -929,20 +1025,6 @@ function themeChanger(themenr) {
 
 // ---------- EXPERIMENTAL STUFF ---------- //
 
-const exportBtn = document.querySelector('#export-btn');
-const importBtn = document.querySelector('#import-btn');
-
-exportBtn.addEventListener('click', () => {
-    exportData(LIST);
-});
-
-importBtn.addEventListener('click', () => {
-    filterControl.style.display = "flex";
-    secondaryOptions.style.display = "flex";
-
-    importData();
-
-});
 
 
 // TESTING SORT

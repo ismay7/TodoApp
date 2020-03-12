@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow+Condensed|Josefin+Sans|Karla&display=swap');
-
 /* RESET */
-*{
+
+* {
     border: none;
     margin: 0;
     padding: 0;
@@ -12,23 +12,27 @@
 }
 
 /* MOZILLA disable ugly accessibility stuff, sorry */
+
 button::-moz-focus-inner {
     border: 0;
 }
+
 select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
 }
+
 select {
     background: transparent;
 }
 
 /* PSEUDO_SELECTORS */
-::selection{
+
+::selection {
     background-color: #aaaaaa;
 }
 
-::placeholder{
+::placeholder {
     color: var(--faint);
     font-size: 1.1rem;
     text-align: center;
@@ -36,9 +40,9 @@ select {
 
 html {
     font-size: 100%;
-  }
+}
 
-#container{
+#container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -48,36 +52,37 @@ html {
     min-height: 100vh;
 }
 
-#todoBox{
+#todoBox {
     margin: 30px 12px;
     max-width: 600px;
     align-self: center;
     flex-grow: 1;
 }
+
 @media only screen and (max-width: 414px) {
-    #tdList{
+    #tdList {
         max-width: 90%;
     }
-    html{
+    html {
         font-size: 1em;
     }
-
 }
 
-h1{
+h1 {
     text-align: center;
     color: var(--main);
     font-size: 2.7rem;
     filter: var(--glow);
 }
-#subtitle{
+
+#subtitle {
     font-size: 1rem;
     text-align: center;
     margin-top: 2px;
     filter: var(--glow);
 }
 
-#insertBox{
+#insertBox {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -85,7 +90,7 @@ h1{
     margin: 2rem 1rem 2rem 0;
 }
 
-input#inp{
+input#inp {
     width: 80%;
     border-radius: 10px;
     background: var(--bg-color);
@@ -97,7 +102,7 @@ input#inp{
     line-height: 1.3rem;
 }
 
-button#add{
+button#add {
     font-size: 2.0rem;
     width: 2.9rem;
     height: 2.9rem;
@@ -107,10 +112,10 @@ button#add{
     border-radius: 100%;
     background: var(--main-bg);
     -webkit-box-shadow: var(--main-bs);
-    box-shadow:  var(--main-bs);
+    box-shadow: var(--main-bs);
 }
 
-button.check{
+button.check {
     font-size: 1.3rem;
     color: var(--main);
     width: 2.6rem;
@@ -120,11 +125,12 @@ button.check{
     border-radius: 8px;
     background: var(--main-bg);
     -webkit-box-shadow: var(--inp-shadow);
-    box-shadow:  var(--inp-shadow);
+    box-shadow: var(--inp-shadow);
 }
 
 /* ICONS */
-.fa-plus{
+
+.fa-plus {
     display: inline-block;
     text-align: center;
     font-size: 50%;
@@ -133,7 +139,7 @@ button.check{
     filter: var(--glow);
 }
 
-.fa-check{
+.fa-check {
     display: inline;
     opacity: 0;
     text-align: right;
@@ -141,29 +147,31 @@ button.check{
     filter: var(--glow);
 }
 
-.done{
+.done {
     opacity: 1;
 }
-.actionPreview{
+
+.actionPreview {
     opacity: 0;
 }
 
-
-#tdList{
+#tdList {
     margin: 35px auto;
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
     background: var(--bg-color);
-    -webkit-box-shadow:  var(--main-bs);
-    box-shadow:  var(--main-bs);
+    -webkit-box-shadow: var(--main-bs);
+    box-shadow: var(--main-bs);
 }
-#tdList:empty, #tdList.alldone, #tdList.allundone, #tdList.nonedeleted, #tdList.allempty{
+
+#tdList:empty, #tdList.alldone, #tdList.allundone, #tdList.nonedeleted, #tdList.allempty {
     box-shadow: none;
     animation: none;
     margin: 5rem 0;
 }
-#tdList:empty::after{
+
+#tdList:empty::after {
     display: block;
     width: 100%;
     font-size: 1rem;
@@ -171,7 +179,7 @@ button.check{
     color: var(--faint);
 }
 
-.alldone::after, .allundone::after, .nonedeleted::after, .allempty::after{
+.alldone::after, .allundone::after, .nonedeleted::after, .allempty::after {
     display: block;
     width: 100%;
     font-size: 1rem;
@@ -180,35 +188,40 @@ button.check{
     color: var(--faint);
 }
 
-.allempty::after{
+.allempty::after {
     content: 'Nothing to show yet';
 }
-.alldone::after{
+
+.alldone::after {
     content: 'No tasks to do here';
 }
-.allundone::after{
+
+.allundone::after {
     content: 'No tasks done yet';
 }
-.nonedeleted::after{
+
+.nonedeleted::after {
     content: 'No items in the trash';
 }
 
-.grow{
+.grow {
     animation: grow 800ms ease-in-out 1;
 }
-.shrink{
+
+.shrink {
     animation: shrink 800ms ease-in-out 1;
 }
 
-td{
+td {
     padding: 10px 12px;
 }
-td:last-child{
+
+td:last-child {
     padding-right: 10px;
     text-align: right;
 }
 
-.title{
+.title {
     text-align: center;
     font-size: 1.5rem;
     padding: 3px;
@@ -219,12 +232,11 @@ td:last-child{
     filter: var(--glow);
 }
 
-.marked{
+.marked {
     text-decoration: line-through;
 }
 
-
-textarea.editForm{
+textarea.editForm {
     padding: 8px 5px;
     text-align: center;
     font-size: 1.5rem;
@@ -238,15 +250,14 @@ textarea.editForm{
     word-break: break-all;
 }
 
-
-#filterControl{
+#filterControl {
     display: flex;
     justify-content: space-between;
     text-align: center;
     filter: var(--glow);
 }
 
-.options-btn{
+.options-btn {
     padding: 8px 4px;
     margin: 0 10px;
     cursor: pointer;
@@ -256,40 +267,41 @@ textarea.editForm{
     box-sizing: border-box;
 }
 
-.btnViewState{
+.btnViewState {
     border-bottom: 1px solid var(--main);
 }
 
-.dragOver{
+.dragOver {
     /* box-shadow: 0 -5px 5px -5px #d80053; */
     border: 2px dashed var(--main);
     filter: var(--glow);
 }
 
-.dragenter-btn{
+.dragenter-btn {
     filter: var(--glow);
 }
 
-#secondaryOptions{
+#secondaryOptions {
     display: flex;
     justify-content: space-between;
     text-align: center;
     filter: var(--glow);
 }
 
-.drag-general{
+.drag-general {
     border: 1px dashed var(--faint);
     border-radius: 5px;
     padding: 10px 20px;
 }
 
-.desc-btn{
+.desc-btn {
     cursor: pointer;
 }
-.knob{
+
+.knob {
     margin: 2px;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-top: 8px solid var(--main);
@@ -297,18 +309,20 @@ textarea.editForm{
     transition: all 300ms linear;
     filter: var(--glow);
 }
-.knobRotate{
+
+.knobRotate {
     transform: rotate(0deg);
 }
 
-.grow-Y{
+.grow-Y {
     animation: grow-Y 300ms ease-in-out;
 }
-.shrink-Y{
+
+.shrink-Y {
     animation: shrink-Y 300ms ease-in-out;
 }
 
-.desc-area{
+.desc-area {
     width: 100%;
     resize: vertical;
     font-size: 1.1rem;
@@ -318,32 +332,54 @@ textarea.editForm{
     box-shadow: var(--inp-shadow);
     background-color: var(--bg-color);
 }
-.hidden{
-   display: none;
+
+.hidden {
+    display: none;
 }
 
 /* ANIMATIONS */
 
 @keyframes grow {
-    from { transform: scale(0) }
-    to   { transform: scale(1) }
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
 }
 
 @keyframes shrink {
-    from   { transform: scale(1) }
-    to { transform: scale(0) }
+    from {
+        transform: scale(1)
+    }
+    to {
+        transform: scale(0)
+    }
 }
 
 @keyframes grow-Y {
-    from   { transform: scaleY(0); transform-origin: top center;}
-    to { transform: scaleY(1); transform-origin: top center;}
-}
-@keyframes shrink-Y {
-    from   { transform: scaleY(1); transform-origin: top center;}
-    to { transform: scaleY(0); transform-origin: top center;}
+    from {
+        transform: scaleY(0);
+        transform-origin: top center;
+    }
+    to {
+        transform: scaleY(1);
+        transform-origin: top center;
+    }
 }
 
-#night-icon{
+@keyframes shrink-Y {
+    from {
+        transform: scaleY(1);
+        transform-origin: top center;
+    }
+    to {
+        transform: scaleY(0);
+        transform-origin: top center;
+    }
+}
+
+#night-icon {
     position: absolute;
     font-size: 1.5rem;
     top: 1.4rem;
@@ -353,28 +389,9 @@ textarea.editForm{
     filter: var(--glow);
 }
 
-#user-box{
-    text-align: center;
-}
-
-/*  LOGIN REGISTER Buttons etc.  */
-.userBtn{
-    font-size: 0.8rem;
-    padding: 8px 10px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: transparent;
-    color: var(--main);
-    filter: var(--glow);
-    border-bottom: 1px solid transparent;
-}
-
-.userBtn:hover{
-    border-bottom: 1px solid var(--main);
-}
-
 /* FOOTER */
-#footer{
+
+#footer {
     width: 100%;
     flex-shrink: 0;
     z-index: 5;
@@ -385,7 +402,7 @@ textarea.editForm{
 
 /* POP-UP STUFF */
 
-#set-icon{
+#set-icon {
     position: absolute;
     font-size: 1.5rem;
     top: 1.2rem;
@@ -395,7 +412,7 @@ textarea.editForm{
     filter: var(--glow);
 }
 
-#shade{
+#shade {
     position: absolute;
     display: none;
     justify-content: center;
@@ -406,18 +423,18 @@ textarea.editForm{
     background-color: var(--bg-color);
 }
 
-#popup{
+#popup {
     z-index: 10;
     min-width: 200px;
     line-height: 1.5;
     background-color: var(--bg-color);
     border-radius: 12px;
-    box-shadow:  var(--main-bs);
+    box-shadow: var(--main-bs);
     animation: grow 300ms ease-in;
     font-size: 1.3rem;
 }
 
-#w-header{
+#w-header {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -427,7 +444,8 @@ textarea.editForm{
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
-#w-title{
+
+#w-title {
     margin: 0;
     padding-bottom: 5px;
     border-bottom: 1px solid var(--faint);
@@ -435,66 +453,72 @@ textarea.editForm{
     filter: var(--glow);
 }
 
-#closeBtn{
+#closeBtn {
     margin: 0;
     padding: 3px 5px 0 0;
     font-size: 1.2rem;
     filter: var(--glow);
 }
 
-#closeBtn i:hover{
+#closeBtn i:hover {
     color: #e74343;
     cursor: pointer;
 }
 
-#w-body{
+#w-body {
     padding: 0px 20px;
 }
 
-.w-body-part{
+.w-body-part {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     padding: 25px 0;
     margin: 0;
-    border-bottom: 1px solid var(--theme);
+    border-bottom: 1px solid var(--faint);
     filter: var(--glow);
 }
-.w-body-part:last-child{
+
+.w-body-part:last-child {
     border-bottom: 0;
 }
-.w-body-part button{
+
+.w-body-part button {
     padding: 10px 10px;
 }
-#clearList:hover{
+
+#clearList:hover {
     color: #e74343;
     border-bottom: 1px solid #e74343;
 }
-#clearList:hover i{
+
+#clearList:hover i {
     color: #e74343;
 }
 
-.opt{
+.opt {
     max-width: 250px;
     padding: 0px 25px 0px 0px;
     margin-bottom: 0px;
 }
 
 /* RESET Select */
+
 select {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-} 
+}
 
 /* NEW Select */
-.select-wrapper{
+
+.select-wrapper {
     position: relative;
-    border-bottom: 1px solid var(--faint);
+    /* border-bottom: 1px solid var(--faint); */
     /* padding-right: 20px; */
 }
 
-select#visuals{
+select {
     cursor: pointer;
     background-color: var(--main-bg);
     margin: 0;
@@ -504,40 +528,78 @@ select#visuals{
     font-size: 1.2rem;
 }
 
-#visuals > option{
+#coll-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    text-align: center;
+    place-content: center;
+    border-bottom: 1px solid var(--faint);
+}
+
+#coll-wrapper {
+    width: 50%;
+    margin: 50px auto 25px auto;
+    border-radius: 8px;
+    box-shadow: var(--inp-shadow);
+}
+
+#collections {
+    padding: 10px 20px 10px 10px;
+    place-self: flex-end;
+}
+
+#visuals>option, #collections>option {
     background: var(--main-bg);
-    color: var(--main);
+    color: rgb(39, 39, 39);
+    line-height: 1.4rem;
     outline: none;
 }
 
+.userBtn {
+    font-size: 1rem;
+    padding: 17px 10px;
+    margin: 1rem;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--main);
+    filter: var(--glow);
+    border-bottom: 1px solid transparent;
+    place-self: flex-end;
+}
+
+.userBtn:hover {
+    border-bottom: 1px solid var(--main);
+}
+
 /* CSS Arrow down for select */
-.arrow-down{
+
+.arrow-down {
     position: absolute;
     left: 93%;
     top: 34%;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid var(--main);
 }
 
-
 /* MEDIA QUERIES */
 
 /* disable false HOVER on TOUCH devices */
+
 @media not all and (pointer: coarse) {
-    button.check:hover .fa-check{
+    button.check:hover .fa-check {
         display: inline;
         color: var(--main);
         filter: var(--glow);
         opacity: 0.5;
     }
-    .actionPreview:hover{
+    .actionPreview:hover {
         opacity: 0.5;
     }
-    .options-btn:hover{
+    .options-btn:hover {
         border-bottom: 1px solid var(--faint);
     }
 }
-

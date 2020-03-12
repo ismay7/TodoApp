@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/ismay7/TodoApp#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "glob": "^7.1.6"
   },
   "devDependencies": {}
 }
