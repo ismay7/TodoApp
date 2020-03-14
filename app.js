@@ -31,6 +31,9 @@ const visOpt = document.querySelectorAll(".vis-opt");
 //LIST management
 const collections = document.querySelector('#collections');
 const collOptions = document.querySelectorAll('.coll-opt');
+const exportBtn = document.querySelector('#export-btn');
+const addlistBtn = document.querySelector('#newcoll-btn');
+const deletelistBtn = document.querySelector('#deletecoll-btn');
 
 // Start Variables
 let LIST, id, view;
@@ -104,10 +107,9 @@ function exportData(List) {
             },
             body: JSON.stringify(List),
         })
-        alert(`Todo list has been saved as ${savefile}!`);
         List.shift();
         createOpt();
-        collections.value = COLL[COLL.length - 1];
+        // collections.value = COLL[COLL.length - 1];
     }
     else {
         return;
@@ -124,15 +126,55 @@ function importData(List, listToShow) {
         id = List.length;
         updateList(List);
         loadTODO();
+        inp.focus();
     }).catch(err => {
         if (err) throw err;
     });
 
 };
 
-// choosing List to
-const exportBtn = document.querySelector('#export-btn');
 
+// add new empty List
+addlistBtn.addEventListener('click', () => {
+    LIST = [];
+    exportData(LIST);
+    collections.value = COLL[COLL.length - 1];
+    updateList(LIST);
+    loadTODO();
+    inp.focus();
+});
+
+
+// delete active List
+function deletelist(id) {
+    fetch(`/delete`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(id)
+    }).then(() => {
+        let COLLdeleteIndex = (value) => value === collections.value;
+        let foundIndex = COLL.findIndex(COLLdeleteIndex);
+        COLL.splice(foundIndex, 1);
+        updateColl(COLL);
+        createOpt();
+        collections.value = COLL[0];
+    }).catch(err => {
+        if (err) throw err;
+    });
+    console.log(`Deleted list: ${id}`)
+}
+
+
+deletelistBtn.addEventListener('click', () => {
+    let id = [collections.value];
+    console.log(id);
+
+    deletelist(id);
+});
+
+// List save as ... (EXPORT)
 exportBtn.addEventListener('click', () => {
     exportData(LIST);
 });

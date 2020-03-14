@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const glob = require("glob");
+
 let COLL = [];
 
 const app = express();
@@ -35,6 +35,17 @@ app.post('/data', (req, res) => {
         if (err) throw err;
     });
     console.log('json file updated ...');
+    res.end();
+});
+
+
+// delete JSON file 
+app.post(`/delete`, (req, res) => {
+    let id = req.body[0];
+    fs.unlink(`./data/${id}.json`, (err) => {
+        if (err) throw err;
+    });
+    console.log('json file deleted ...');
     res.end();
 });
 

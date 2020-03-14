@@ -18,7 +18,7 @@
     <main id="container" ondragover="allowDrop(event)" ondrop="drop(event)">
 
         <div id="todoBox">
-            <h1>TodoApp</h1>
+            <h1>ToDoApp</h1>
 
             <div id="coll-box">
                 <div id="coll-wrapper" class="select-wrapper">
@@ -27,7 +27,13 @@
                         <option class="coll-opt" value="default">default</option>
                     </select>
                 </div>
-                <button class="userBtn" id="export-btn"><i class="fas fa-cloud-upload-alt"></i> export ...</button>
+                <div id="user-box">
+                    <button class="userBtn" id="newcoll-btn"><i class="fas fa-notes-medical"></i> new list</button>
+                    <button class="userBtn" id="deletecoll-btn"><i class="far fa-calendar-minus"></i> delete
+                        list</button>
+                    <button class="userBtn" id="export-btn"><i class="fas fa-cloud-upload-alt"></i> save as...</button>
+                </div>
+
             </div>
 
 
